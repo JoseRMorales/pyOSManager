@@ -14,15 +14,20 @@ pip install pyosmanager
 import asyncio
 
 from pyosmanager import OSMClient
+from pyosmanager.responses import DeviceResponse
 
 
 async def main():
     async with OSMClient("http://localhost:8080") as client:
-        print(await client.get_devices())
+        res = await client.get_devices()
+        d: DeviceResponse
+        for d in res:
+            print(d.name)
 
 
 if __name__ == "__main__":
     asyncio.run(main())
+
 ```
 
 ## Methods
