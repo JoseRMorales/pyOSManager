@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setup(
     name="pyosmanager",
     packages=["pyosmanager"],
-    version="0.1",
+    version="0.1.1",
     license="MIT",
     description="Python client for Open Surplus Manager",
     long_description=long_description,
@@ -27,7 +27,7 @@ setup(
         "backoff",
     ],
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 3 - Beta",
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Build Tools",
         "License :: OSI Approved :: MIT License",

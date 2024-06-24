@@ -1,8 +1,12 @@
+""" A wrapper for the OS Manager API using aiohttp. """
+
 import asyncio
 import logging
 
 import aiohttp
 import backoff
+
+from pyosmanager.responses import DeviceResponse
 
 logger = logging.getLogger(__name__)
 
@@ -78,36 +82,54 @@ class OSMClient:
             logger.error(f"API request failed: {str(e)}")
             raise APIError(f"API request failed: {str(e)}") from e
 
-    async def get_hello_world(self):
+    async def is_healthy(self) -> bool:
         """
-        Get the hello world message from the API to verify connectivity.
+        Check if the API is healthy.
 
-        :return: The hello world message
+        :return: True if the API is healthy, False otherwise
         """
-        return await self.__get_data("")
+        try:
+            await self.__get_data("")
+            return True
+        except APIError:
+            return False
 
-    async def get_devices(self):
+    async def get_devices(self) -> list[DeviceResponse]:
         """
         Get a list of all devices.
 
         :return: List of devices
         """
-        return await self.__get_data("devices")
+        devices = await self.__get_data("devices")
+        return [DeviceResponse(**device) for device in devices]
 
-    async def get_device(self, device_name):
+    async def get_device(self, device_name) -> DeviceResponse:
         """
         Get information about a specific device.
 
         :param device_name: Name of the device
-        :return: Device information
+        :return: DeviceResponse object with the device information
         """
-        return await self.__get_data(f"device/{device_name}")
+        device = await self.__get_data(f"device/{device_name}")
+        return DeviceResponse(**device)
 
-    async def get_device_consumption(self, device_name):
+    async def get_device_consumption(self, device_name) -> float:
         """
         Get the consumption data of a specific device.
 
         :param device_name: Name of the device
-        :return: Consumption data
+        :return: Consumption data of the device in watts
         """
-        return await self.__get_data(f"device/{device_name}/consumption")
+        res = await self.__get_data(f"device/{device_name}/consumption")
+
+        return res["consumption"]
+
+    async def get_surplus(self) -> float:
+        """
+        Get the current surplus data.
+
+        :return: Surplus data in watts
+        """
+        res = await self.__get_data("surplus")
+
+        return res["surplus"]

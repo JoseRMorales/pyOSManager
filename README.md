@@ -27,18 +27,22 @@ if __name__ == "__main__":
 
 ## Methods
 
-- `get_hello_world(self)`
+- `is_healthy() -> bool`
 
-Retrieve the hello world message from the API to verify connectivity.
+True if the server is healthy
 
-- `get_devices(self)`
+- `get_devices() -> list[DeviceResponse]`
 
 Retrieve a list of devices
 
-- `get_device(self, device_name: str)`
+- `get_device(device_name: str) -> DeviceResponse`
   
 Retrieve a device data dictionary by name
 
-- `get_device_consumption(self, device_name: str)`
+- `get_device_consumption(device_name: str) -> float`
   
 Retrieve the device consumption by name
+
+- `get_surplus() -> float:`
+
+Retrieve the surplus value
