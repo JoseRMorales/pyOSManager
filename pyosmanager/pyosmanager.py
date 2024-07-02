@@ -133,3 +133,82 @@ class OSMClient:
         res = await self.__get_data("surplus")
 
         return res["surplus"]
+
+    async def set_surplus_margin(self, margin: float) -> float:
+        """
+        Set the surplus margin.
+
+        :param margin: The surplus margin to set
+        :return: The new surplus margin
+        """
+        data = {"surplus_margin": margin}
+        res = await self.__post_data("surplus_margin", data)
+
+        return res["surplus_margin"]
+
+    async def set_grid_margin(self, margin: float) -> float:
+        """
+        Set the grid margin.
+
+        :param margin: The grid margin to set
+        :return: The new grid margin
+        """
+        data = {"grid_margin": margin}
+        res = await self.__post_data("grid_margin", data)
+
+        return res["grid_margin"]
+
+    async def set_idle_power(self, idle_power: float) -> float:
+        """
+        Set the idle power.
+
+        :param idle_power: The idle power to set
+        :return: The new idle power
+        """
+        data = {"idle_power": idle_power}
+        res = await self.__post_data("idle_power", data)
+
+        return res["idle_power"]
+
+    async def set_device_max_consumption(
+        self, device_name: str, max_consumption: float
+    ) -> float:
+        """
+        Set the maximum consumption of a device.
+
+        :param device_name: Name of the device
+        :param max_consumption: The maximum consumption to set
+        :return: The new maximum consumption
+        """
+        data = {"max_consumption": max_consumption}
+        res = await self.__post_data(f"device/{device_name}/max_consumption", data)
+
+        return res["max_consumption"]
+
+    async def set_device_expected_consumption(
+        self, device_name: str, expected_consumption: float
+    ) -> float:
+        """
+        Set the expected consumption of a device.
+
+        :param device_name: Name of the device
+        :param expected_consumption: The expected consumption to set
+        :return: The new expected consumption
+        """
+        data = {"expected_consumption": expected_consumption}
+        res = await self.__post_data(f"device/{device_name}/expected_consumption", data)
+
+        return res["expected_consumption"]
+
+    async def set_device_cooldown(self, device_name: str, cooldown: int) -> int:
+        """
+        Set the cooldown of a device.
+
+        :param device_name: Name of the device
+        :param cooldown: The cooldown to set
+        :return: The new cooldown
+        """
+        data = {"cooldown": cooldown}
+        res = await self.__post_data(f"device/{device_name}/cooldown", data)
+
+        return res["cooldown"]
