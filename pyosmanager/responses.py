@@ -19,3 +19,16 @@ class DeviceResponse:
     powered: bool
     cooldown: int | None
     enabled: bool
+
+
+@dataclass
+class CoreResponse:
+    """
+    This class is used to represent the response of the API
+    when querying for the core.
+    """
+
+    surplus: float
+    surplus_margin: float
+    grid_margin: float
+    idle_power: float

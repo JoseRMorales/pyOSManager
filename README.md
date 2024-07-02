@@ -36,6 +36,10 @@ if __name__ == "__main__":
 
 True if the server is healthy
 
+- `get_core_state() -> dict`
+
+Retrieve the core state
+
 - `get_devices() -> list[DeviceResponse]`
 
 Retrieve a list of devices
@@ -51,3 +55,27 @@ Retrieve the device consumption by name
 - `get_surplus() -> float:`
 
 Retrieve the surplus value
+
+- `set_surplus_margin(margin: float) -> float:`
+  
+Set the surplus margin
+
+- `set_grid_margin(margin: float) -> float:`
+
+Set the grid margin
+
+- `set_idle_power(idle_power: float) -> float:`
+
+Set the idle power
+
+- `set_device_max_consumption(device_name: str, max_consumption: float) -> float:`
+
+Set the max consumption for a device
+
+- `set_device_expected_consumption(device_name: str, expected_consumption: float) -> float:`
+
+Set the expected consumption for a device
+
+- `set_device_cooldown(device_name: str, cooldown: int) -> int:`
+
+Set the cooldown for a device

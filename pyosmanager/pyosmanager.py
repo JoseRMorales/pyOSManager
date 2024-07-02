@@ -6,7 +6,7 @@ import logging
 import aiohttp
 import backoff
 
-from pyosmanager.responses import DeviceResponse
+from pyosmanager.responses import CoreResponse, DeviceResponse
 
 logger = logging.getLogger(__name__)
 
@@ -72,7 +72,7 @@ class OSMClient:
         """
         try:
             async with self.session.post(
-                f"{self.base_url}/{endpoint}", json=data
+                f"{self.base_url}/api/{endpoint}", json=data
             ) as response:
                 response.raise_for_status()
                 data = await response.json()
@@ -93,6 +93,15 @@ class OSMClient:
             return True
         except APIError:
             return False
+
+    async def get_core_state(self) -> dict:
+        """
+        Get the core state of the system.
+
+        :return: Core state of the system
+        """
+        core = await self.__get_data("core")
+        return CoreResponse(**core)
 
     async def get_devices(self) -> list[DeviceResponse]:
         """
