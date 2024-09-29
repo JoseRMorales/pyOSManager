@@ -13,7 +13,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Jose R. Morales",
     author_email="dev@josermorales.com",
-    url="https://github.com/JoseRa9/pyOSManager/",
+    url="https://github.com/JoseRMorales/pyOSManager/",
     keywords=[
         "API",
         "Open Surplus Manager",
