@@ -2,6 +2,8 @@
 
 > Python client for Open Surplus Manager
 
+This repo is about the Python client, for info about Open Surplus Manager see the project [repository](https://github.com/JoseRMorales/OpenSurplusManager)
+
 ## Installation
 
 ```bash
